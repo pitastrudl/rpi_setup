@@ -1,2 +1,23 @@
 ---
 # tasks file for roles/network_setup
+
+- name: Enable service ufw
+  ansible.builtin.systemd:
+    name: ufw
+    enabled: yes
+
+- name: Allow all access to tcp ports
+  community.general.ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop: "{{ tcp_ports }}"
+
+- name: Start service ufw
+  ansible.builtin.systemd:
+    state: started
+    name: ufw
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
