@@ -1,0 +1,9 @@
+apt_packages: 
+  - git
+  - vim 
+  - ufw 
+tcp_ports: 
+  - '22'
+  - '80'
+  - '443'
+ansible_python_interpreter: /usr/bin/python3
