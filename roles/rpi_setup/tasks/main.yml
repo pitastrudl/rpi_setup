@@ -3,3 +3,15 @@
 - name: Set timezone
   community.general.timezone:
     name: Europe/Ljubljana
+
+- name: Ensure a locale exists
+  community.general.locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Update repositories cache and install basic packages 
+  ansible.builtin.apt:
+    name: "{{ apt_packages }}"
+    update_cache: yes
+  tags:
+    - slow
